@@ -1,5 +1,3 @@
-(local M {})
-
 (fn starts-with [str prefix]
   (= (string.sub str 1 (length prefix)) prefix))
 
@@ -32,11 +30,11 @@
      (scale-channel g)
      (scale-channel b)]))
 
-(fn M.scale [color weight]
+(fn scale [color weight]
   (let [rgb (hex->rgb color)]
     (rgb->hex (scale-rgb rgb weight))))
 
-(fn M.mix [color1 color2 weight]
+(fn mix [color1 color2 weight]
   (let [rgb1 (hex->rgb color1)
         rgb2 (hex->rgb color2)]
     (rgb->hex
@@ -44,10 +42,10 @@
         (scale-rgb rgb1 weight)
         (scale-rgb rgb2 (- 1 weight))))))
 
-(fn M.lighten [color weight]
+(fn lighten [color weight]
   (scale color (+ 1 weight)))
 
-(fn M.darken [color weight]
+(fn darken [color weight]
   (scale color (- 1 weight)))
 
-M
+{: lighten : darken : scale : mix}
